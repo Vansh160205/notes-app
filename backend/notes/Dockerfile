@@ -12,6 +12,9 @@ COPY .mvn .mvn
 # Copy source code
 COPY src ./src
 
+# Make Maven wrapper executable
+RUN chmod +x ./mvnw
+
 # Build the Spring Boot app
 RUN ./mvnw clean package -DskipTests || mvn clean package -DskipTests
 
