@@ -6,16 +6,17 @@ WORKDIR /app
 
 # Copy Maven files first for caching
 COPY pom.xml .
+COPY mvnw .
+COPY .mvn .mvn
 
 # Copy source code
 COPY src ./src
 
 # Build the Spring Boot app
-# Use Maven wrapper if exists, else fallback to mvn
 RUN ./mvnw clean package -DskipTests || mvn clean package -DskipTests
 
-# Expose the port your app runs on
+# Expose port your app will run on
 EXPOSE 8080
 
-# Run the jar
+# Start Spring Boot
 CMD ["java", "-jar", "target/notes-0.0.1-SNAPSHOT.jar"]
