@@ -73,3 +73,11 @@ class ShareController {
         return service.getSharedNote(slug);
     }
 }
+
+@RestController
+class HealthController {
+    @GetMapping("/health")
+    public String health() {
+        return "OK";
+    }
+}
