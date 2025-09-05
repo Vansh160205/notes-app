@@ -43,7 +43,7 @@ function Home() {
           n.id === id ? { ...n, ...res.data } : n
         );
         setNotes(updated);
-        alert(`Share link: ${process.env.REACT_APP_FRONTEND_URL}/share/${res.data.slug}`);
+        alert(`Share link: ${process.env.REACT_APP_API_URL}/share/${res.data.slug}`);
       })
       .catch((err) => console.error(err));
   };
