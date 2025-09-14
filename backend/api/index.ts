@@ -1,4 +1,7 @@
-import app from "../src/App";  // import the Express app
+// backend/api/index.ts
+import { VercelRequest, VercelResponse } from '@vercel/node';
+import app from '../src/App'; // your express app
 
-
-export default app;
+export default function handler(req: VercelRequest, res: VercelResponse) {
+  return app(req as any, res as any);
+}
