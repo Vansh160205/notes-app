@@ -9,9 +9,8 @@ import tenantAdminRoutes from "./routes/tenantsAdmin";
 const app = express();
 
 const allowedOrigins = [
+  process.env.FRONTEND_URL,
   "http://localhost:3000",
-  "https://notes-app-rvkz-ehgild2m3-vansh160205s-projects.vercel.app/",
-  "https://notes-app-phi-self-76.vercel.app",
 ];
 
 // ✅ Use cors with function, no duplicate
