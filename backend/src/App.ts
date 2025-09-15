@@ -11,7 +11,7 @@ const app = express();
 const allowedOrigins = [
   "http://localhost:3000",
   "https://notes-app-vansh160205s-projects.vercel.app",
-  "https://notes-app-phi-self-76.vercel.app",
+  "https://notes-app-rvkz.vercel.app/",
 ];
 
 // ✅ Use cors with function, no duplicate

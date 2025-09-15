@@ -1,7 +1,7 @@
 // lib/api.ts
 "use client";
 
-export const API_URL = "https://notes-app-vansh160205s-projects.vercel.app" ;
+export const API_URL = "https://notes-app-phi-self-76.vercel.app" ;
 
 export async function apiRequest(
   path: string,
