@@ -13,10 +13,11 @@ const allowedOrigins = [
   "http://localhost:3000",
 ];
 
-// ✅ Use cors with function, no duplicate
+// ✅ Use cors with a function to handle different origins
 app.use(
   cors({
     origin: (origin, callback) => {
+      // Allow requests with no origin (e.g. from mobile apps, curl, or server-to-server requests)
       if (!origin || allowedOrigins.includes(origin)) {
         return callback(null, true);
       }
