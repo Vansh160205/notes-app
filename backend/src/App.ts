@@ -9,24 +9,29 @@ import tenantAdminRoutes from "./routes/tenantsAdmin";
 const app = express();
 
 const allowedOrigins = [
-  "http://localhost:3000",                 // local dev
-  "https://notes-app-vansh160205s-projects.vercel.app/",
-  "https://notes-app-phi-self-76.vercel.app/"       // deployed frontend
+  "http://localhost:3000",                 
+  "https://notes-app-vansh160205s-projects.vercel.app",
+  "https://notes-app-phi-self-76.vercel.app"
 ];
 
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Allow requests with no origin (like mobile apps or curl)
-      if (!origin) return callback(null, true);
+      if (!origin) return callback(null, true); // mobile/curl
       if (allowedOrigins.includes(origin)) {
         return callback(null, true);
       }
       return callback(new Error("Not allowed by CORS"));
     },
-    credentials: true, // if you're using cookies/auth headers
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
   })
 );
+
+// Explicitly handle preflight
+app.options("*", cors());
+
 app.use(bodyParser.json());
 
 // Health endpoint
