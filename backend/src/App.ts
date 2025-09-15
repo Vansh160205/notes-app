@@ -10,15 +10,29 @@ const app = express();
 
 const allowedOrigins = [
   "http://localhost:3000",
-  "https://notes-app-rvkz.vercel.app/",
+  "https://notes-app-vansh160205s-projects.vercel.app",
+  "https://notes-app-phi-self-76.vercel.app",
 ];
 
 // ✅ Use cors with function, no duplicate
-app.use(cors({
-  origin: "*", // allow all
-  credentials: true
-}));
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+      return callback(new Error("Not allowed by CORS"));
+    },
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 
+// ✅ Handle preflight *without* overriding previous config
+app.options("*", (req, res) => {
+  res.sendStatus(200);
+});
 
 app.use(bodyParser.json());
 

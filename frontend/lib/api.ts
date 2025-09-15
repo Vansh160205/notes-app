@@ -1,7 +1,7 @@
 // lib/api.ts
 "use client";
 
-export const API_URL = "https://notes-app-phi-self-76.vercel.app";
+export const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
 
 export async function apiRequest(
   path: string,
