@@ -1,7 +1,7 @@
 // lib/api.ts
 "use client";
 
-export const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
+export const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export async function apiRequest(
   path: string,
