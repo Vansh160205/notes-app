@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import bodyParser from 'body-parser';
+import bodyParser from "body-parser";
 
 import authRoutes from "./routes/auth";
 import noteRoutes from "./routes/notes";
@@ -9,28 +9,30 @@ import tenantAdminRoutes from "./routes/tenantsAdmin";
 const app = express();
 
 const allowedOrigins = [
-  "http://localhost:3000",                 
+  "http://localhost:3000",
   "https://notes-app-vansh160205s-projects.vercel.app",
-  "https://notes-app-phi-self-76.vercel.app"
+  "https://notes-app-phi-self-76.vercel.app",
 ];
 
+// ✅ Use cors with function, no duplicate
 app.use(
   cors({
     origin: (origin, callback) => {
-      if (!origin) return callback(null, true); // mobile/curl
-      if (allowedOrigins.includes(origin)) {
+      if (!origin || allowedOrigins.includes(origin)) {
         return callback(null, true);
       }
       return callback(new Error("Not allowed by CORS"));
     },
+    credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true,
   })
 );
 
-// Explicitly handle preflight
-app.options("*", cors());
+// ✅ Handle preflight *without* overriding previous config
+app.options("*", (req, res) => {
+  res.sendStatus(200);
+});
 
 app.use(bodyParser.json());
 
@@ -43,6 +45,5 @@ app.get("/health", (_req, res) => {
 app.use("/auth", authRoutes);
 app.use("/notes", noteRoutes);
 app.use("/tenants/:slug", tenantAdminRoutes);
-
 
 export default app;
