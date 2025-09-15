@@ -29,10 +29,6 @@ app.use(
   })
 );
 
-// ✅ Handle preflight *without* overriding previous config
-app.options("*", (req, res) => {
-  res.sendStatus(200);
-});
 
 app.use(bodyParser.json());
 
